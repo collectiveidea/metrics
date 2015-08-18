@@ -12,6 +12,9 @@ describe "Tally Ping" do
       DataPoint.count
     }.from(0).to(1)
 
+    expect(response.status).to eq(201)
+    expect(response.body).to be_present
+
     data_point = DataPoint.last
     expect(data_point.metric).to eq(tally)
     expect(data_point.number).to eq(1)
@@ -82,5 +85,30 @@ describe "Tally Ping" do
     expect(data_point.number).to eq(1)
     expect(data_point.user).to eq("steve")
     expect(data_point.data["howbad"]).to eq("badly")
+  end
+
+  it "bombs if the text matches no tally" do
+    expect {
+      post "/slack", text: "sw0re", user_name: "steve"
+    }.not_to change {
+      DataPoint.count
+    }
+
+    expect(response.status).to eq(422)
+    expect(response.body).to be_present
+  end
+
+  it "bombs if the text matches multiple tallies" do
+    create(:tally, pattern: "wore"
+    )
+
+    expect {
+      post "/slack", text: "swore", user_name: "steve"
+    }.not_to change {
+      DataPoint.count
+    }
+
+    expect(response.status).to eq(409)
+    expect(response.body).to be_present
   end
 end
