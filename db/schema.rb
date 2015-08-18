@@ -11,9 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20150818174249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+
+  create_table "metrics", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "type"
+    t.string   "name"
+    t.string   "pattern"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "metrics", ["created_at"], name: "index_metrics_on_created_at", using: :btree
+  add_index "metrics", ["type"], name: "index_metrics_on_type", using: :btree
 
 end

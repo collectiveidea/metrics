@@ -1,0 +1,2 @@
+class Tally < Metric
+end
