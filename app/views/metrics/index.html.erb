@@ -3,7 +3,6 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Type</th>
         <th></th>
       </tr>
     </thead>
@@ -11,7 +10,6 @@
       <% @metrics.each do |metric| %>
         <tr class="metric-row">
           <td class="metric-row-name"><%= metric.name %></td>
-          <td class="metric-row-type"><%= metric.type %></td>
           <td class="metric-row-actions">
             <%= link_to "View", metric_path(metric) %>
           </td>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150818184800) do
+ActiveRecord::Schema.define(version: 20150818223041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 20150818184800) do
   add_index "data_points", ["number"], name: "index_data_points_on_number", using: :btree
 
   create_table "metrics", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "type"
     t.string   "name"
     t.string   "pattern"
     t.datetime "created_at", null: false
@@ -40,6 +39,5 @@ ActiveRecord::Schema.define(version: 20150818184800) do
   end
 
   add_index "metrics", ["created_at"], name: "index_metrics_on_created_at", using: :btree
-  add_index "metrics", ["type"], name: "index_metrics_on_type", using: :btree
 
 end

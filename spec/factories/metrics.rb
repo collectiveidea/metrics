@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :tally do
+  factory :metric do
     name "My Metric"
     pattern "foo(bar)"
   end

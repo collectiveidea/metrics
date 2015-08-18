@@ -1,11 +1,11 @@
-describe "Tally Ping" do
-  let!(:tally) do
-    create(:tally,
+describe "Metric Ping" do
+  let!(:metric) do
+    create(:metric,
       pattern: '^((?<user>[^ ]+) )?swore( (?<howbad>badly))?( (?<number>\d+(\.\d+)?) times)?$'
     )
   end
 
-  it "creates a data point for the matching tally" do
+  it "creates a data point for the matching metric" do
     expect {
       post "/slack", text: "swore", user_name: "steve"
     }.to change {
@@ -16,7 +16,7 @@ describe "Tally Ping" do
     expect(response.body).to be_present
 
     data_point = DataPoint.last
-    expect(data_point.metric).to eq(tally)
+    expect(data_point.metric).to eq(metric)
     expect(data_point.number).to eq(1)
     expect(data_point.user).to eq("steve")
   end
@@ -29,7 +29,7 @@ describe "Tally Ping" do
     }.from(0).to(1)
 
     data_point = DataPoint.last
-    expect(data_point.metric).to eq(tally)
+    expect(data_point.metric).to eq(metric)
     expect(data_point.number).to eq(2)
     expect(data_point.user).to eq("steve")
   end
@@ -42,7 +42,7 @@ describe "Tally Ping" do
     }.from(0).to(1)
 
     data_point = DataPoint.last
-    expect(data_point.metric).to eq(tally)
+    expect(data_point.metric).to eq(metric)
     expect(data_point.number).to eq(1)
     expect(data_point.user).to eq("brian")
   end
@@ -55,7 +55,7 @@ describe "Tally Ping" do
     }.from(0).to(1)
 
     data_point = DataPoint.last
-    expect(data_point.metric).to eq(tally)
+    expect(data_point.metric).to eq(metric)
     expect(data_point.number).to eq(2)
     expect(data_point.user).to eq("brian")
   end
@@ -68,7 +68,7 @@ describe "Tally Ping" do
     }.from(0).to(1)
 
     data_point = DataPoint.last
-    expect(data_point.metric).to eq(tally)
+    expect(data_point.metric).to eq(metric)
     expect(data_point.number).to eq(1.5)
     expect(data_point.user).to eq("steve")
   end
@@ -81,13 +81,13 @@ describe "Tally Ping" do
     }.from(0).to(1)
 
     data_point = DataPoint.last
-    expect(data_point.metric).to eq(tally)
+    expect(data_point.metric).to eq(metric)
     expect(data_point.number).to eq(1)
     expect(data_point.user).to eq("steve")
     expect(data_point.data["howbad"]).to eq("badly")
   end
 
-  it "bombs if the text matches no tally" do
+  it "bombs if the text matches no metric" do
     expect {
       post "/slack", text: "sw0re", user_name: "steve"
     }.not_to change {
@@ -98,8 +98,8 @@ describe "Tally Ping" do
     expect(response.body).to be_present
   end
 
-  it "bombs if the text matches multiple tallies" do
-    create(:tally, pattern: "wore"
+  it "bombs if the text matches multiple metrics" do
+    create(:metric, pattern: "wore"
     )
 
     expect {

@@ -22,6 +22,15 @@ class Metric < ActiveRecord::Base
     Regexp.new(pattern)
   end
 
+  def ping(text:, user:)
+    match = regexp.match(text)
+    number = match[:number] || 1
+    data = Hash[match.names.zip(match.captures)]
+    data["user"] = match[:user] || user
+
+    data_points.create!(number: number, data: data)
+  end
+
   private
 
   def pattern_must_be_valid

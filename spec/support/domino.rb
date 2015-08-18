@@ -11,14 +11,6 @@ module DOM
         node.fill_in("metric[name]", with: value)
       end
 
-      def type
-        node.find_field("metric[type]").value
-      end
-
-      def type=(value)
-        node.select(value, from: "metric[type]")
-      end
-
       def pattern
         node.find_field("metric[pattern]").value
       end
@@ -44,7 +36,6 @@ module DOM
       selector ".metric-row"
 
       attribute :name, ".metric-row-name"
-      attribute :type, ".metric-row-type"
 
       def follow
         node.click_link("View")
@@ -55,7 +46,6 @@ module DOM
       selector ".metric-detail"
 
       attribute :name, ".metric-detail-name"
-      attribute :type, ".metric-detail-type"
       attribute :pattern, ".metric-detail-pattern"
     end
   end

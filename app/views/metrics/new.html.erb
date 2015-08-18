@@ -2,8 +2,6 @@
   <%= form_for @metric do |form| %>
     <%= form.label :name %>
     <%= form.text_field :name %>
-    <%= form.label :type %>
-    <%= form.select :type, options_for_select(["Tally"]) %>
     <%= form.label :pattern %>
     <%= form.text_field :pattern %>
     <%= form.submit %>
