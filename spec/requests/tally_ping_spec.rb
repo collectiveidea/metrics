@@ -1,7 +1,7 @@
 describe "Tally Ping" do
   let!(:tally) do
     create(:tally,
-      pattern: '^((?<user>[^ ]+) )?swore( (?<number>\d+(\.\d+)?) times)?$'
+      pattern: '^((?<user>[^ ]+) )?swore( (?<howbad>badly))?( (?<number>\d+(\.\d+)?) times)?$'
     )
   end
 
@@ -68,5 +68,19 @@ describe "Tally Ping" do
     expect(data_point.metric).to eq(tally)
     expect(data_point.number).to eq(1.5)
     expect(data_point.user).to eq("steve")
+  end
+
+  it "saves custom data outside of number and user" do
+    expect {
+      post "/slack", text: "swore badly", user_name: "steve"
+    }.to change {
+      DataPoint.count
+    }.from(0).to(1)
+
+    data_point = DataPoint.last
+    expect(data_point.metric).to eq(tally)
+    expect(data_point.number).to eq(1)
+    expect(data_point.user).to eq("steve")
+    expect(data_point.data["howbad"]).to eq("badly")
   end
 end
