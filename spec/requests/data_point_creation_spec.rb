@@ -135,4 +135,18 @@ describe "Data Point Creation" do
     expect(response.status).to eq(409)
     expect(response.body).to be_present
   end
+
+  it "bombs if the referenced user is unknown" do
+    expect {
+      post "/slack",
+        text: "brian swore",
+        user_id: user.slack_id,
+        user_name: user.slack_name
+    }.not_to change {
+      DataPoint.count
+    }
+
+    expect(response.status).to eq(422)
+    expect(response.body).to be_present
+  end
 end
