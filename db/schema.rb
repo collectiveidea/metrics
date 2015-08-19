@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150819105404) do
+ActiveRecord::Schema.define(version: 20150819152444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,14 +21,14 @@ ActiveRecord::Schema.define(version: 20150819105404) do
   create_table "data_points", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "metric_id",  null: false
     t.decimal  "number",     null: false
-    t.hstore   "data"
+    t.hstore   "metadata"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid     "user_id"
   end
 
   add_index "data_points", ["created_at"], name: "index_data_points_on_created_at", using: :btree
-  add_index "data_points", ["data"], name: "index_data_points_on_data", using: :gist
+  add_index "data_points", ["metadata"], name: "index_data_points_on_metadata", using: :gist
   add_index "data_points", ["metric_id"], name: "index_data_points_on_metric_id", using: :btree
   add_index "data_points", ["number"], name: "index_data_points_on_number", using: :btree
   add_index "data_points", ["user_id"], name: "index_data_points_on_user_id", using: :btree

@@ -14,13 +14,13 @@ class DataPoint < ActiveRecord::Base
 
     match = metric.regexp.match(payload[:text])
     number = match.names.include?("number") && match[:number] || 1
-    data = payload.merge(Hash[match.names.zip(match.captures)])
+    metadata = payload.merge(Hash[match.names.zip(match.captures)])
 
     DataPoint.create(
       metric: metric,
       user: user,
       number: number,
-      data: data
+      metadata: metadata
     )
   end
 end

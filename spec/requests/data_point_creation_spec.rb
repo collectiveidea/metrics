@@ -103,7 +103,7 @@ describe "Data Point Creation" do
     expect(data_point.metric).to eq(metric)
     expect(data_point.user).to eq(user)
     expect(data_point.number).to eq(1)
-    expect(data_point.data["howbad"]).to eq("badly")
+    expect(data_point.metadata["howbad"]).to eq("badly")
   end
 
   it "bombs if the text matches no metric" do
