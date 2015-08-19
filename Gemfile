@@ -13,7 +13,9 @@ gem "pg"
 gem "puma"
 
 # Assets
+gem "bootstrap-sass"
 gem "coffee-rails"
+gem "font-awesome-rails"
 gem "jquery-rails"
 gem "sass-rails"
 gem "uglifier"
