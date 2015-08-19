@@ -37,8 +37,12 @@ module DOM
 
       attribute :name, ".metric-row-name"
 
-      def follow
+      def view
         node.click_link("View")
+      end
+
+      def edit
+        node.click_link("Edit")
       end
     end
 

@@ -11,7 +11,8 @@
         <tr class="metric-row">
           <td class="metric-row-name"><%= metric.name %></td>
           <td class="metric-row-actions">
-            <%= link_to "View", metric_path(metric) %>
+            <%= link_to "View", metric %>
+            <%= link_to "Edit", edit_metric_path(metric) %>
           </td>
         </tr>
       <% end %>

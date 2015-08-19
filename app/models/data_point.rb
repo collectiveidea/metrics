@@ -2,8 +2,6 @@ class DataPoint < ActiveRecord::Base
   belongs_to :metric, inverse_of: :data_points
   belongs_to :user, inverse_of: :data_points
 
-  store_accessor :data
-
   validates :metric, presence: true, strict: true
   validates :number, :user, presence: true
   validates :number, numericality: true

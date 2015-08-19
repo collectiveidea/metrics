@@ -21,6 +21,20 @@ class MetricsController < ApplicationController
     end
   end
 
+  def edit
+    @metric = Metric.find(params[:id])
+  end
+
+  def update
+    @metric = Metric.find(params[:id])
+
+    if @metric.update(metric_params)
+      redirect_to metrics_path
+    else
+      render :edit
+    end
+  end
+
   private
 
   def metric_params

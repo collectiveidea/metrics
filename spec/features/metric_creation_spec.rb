@@ -1,7 +1,7 @@
 feature "Metric Creation" do
   scenario "A visitor can create a metric" do
     name = "Swear Jar"
-    pattern = "(?<name>[^ ]+) swore( (?<count>\d+) times)?"
+    pattern = "(?<user>[^ ]+) swore( (?<number>\d+) times)?"
 
     visit new_metric_path
 
@@ -21,7 +21,7 @@ feature "Metric Creation" do
     row = DOM::Metric::Row.first
     expect(row.name).to eq(name)
 
-    row.follow
+    row.view
 
     expect(current_path).to eq(metric_path(metric))
 

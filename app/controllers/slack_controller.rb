@@ -1,4 +1,6 @@
 class SlackController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:slash_command]
+
   def slash_command
     DataPoint.from_slash_command(request.request_parameters)
 
