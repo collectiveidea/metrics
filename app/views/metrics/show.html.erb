@@ -1,7 +1,16 @@
-<div class="metric-detail">
-  <h1 class="metric-detail-name"><%= @metric.name %></h1>
-  <dl>
-    <dt>Pattern</dt>
-    <dd class="metric-detail-pattern"><%= @metric.pattern %></dd>
-  </dl>
+<div class="metric-detail container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="page-header">
+        <nav class="pull-right">
+          <%= link_to fa_icon("arrow-left", text: "Back"), metrics_path, class: "btn btn-default" %>
+        </nav>
+        <h1 class="metric-detail-name"><%= @metric.name %></h1>
+      </div>
+      <dl>
+        <dt><%= Metric.human_attribute_name(:pattern) %></dt>
+        <dd class="metric-detail-pattern"><%= @metric.pattern %></dd>
+      </dl>
+    </div>
+  </div>
 </div>
