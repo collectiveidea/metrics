@@ -1,5 +1,17 @@
-<%= form.label :name %>
-<%= form.text_field :name %>
-<%= form.label :pattern %>
-<%= form.text_field :pattern %>
-<%= form.submit %>
+<div class="form-group">
+  <%= form.label :name, class: "control-label" %>
+  <%= form.text_field :name, class: "form-control" %>
+</div>
+<div class="form-group">
+  <%= form.label :pattern, class: "control-label" %>
+  <%= form.text_area :pattern, class: "form-control" %>
+  <p class="help-block">A pattern to match an incoming <code>/track</code>
+  command. Use named groups to capture metadata. The <code>user</code> named
+  group is for attributing a data point to a different Slack username. The
+  <code>number</code> named group is for quantifying the data point (default is
+  1). User <%= link_to "Rubular", "http://rubular.com", target: "_blank" %> for
+  help.</p>
+</div>
+<div class="form-group">
+  <%= button_tag fa_icon("check", text: "Save Metric"), class: "btn btn-block btn-lg btn-primary", data: { disable: true } %>
+</div>
