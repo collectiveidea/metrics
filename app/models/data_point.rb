@@ -10,7 +10,7 @@ class DataPoint < ActiveRecord::Base
 
   def self.from_slash_command(payload)
     metric = Metric.from_slash_command(payload)
-    user = User.from_slash_command(payload)
+    user = User.from_slash_command(payload, metric: metric)
 
     match = metric.regexp.match(payload[:text])
     number = match[:number] || 1

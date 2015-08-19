@@ -38,6 +38,8 @@ describe "Data Point Creation" do
   end
 
   it "creates a data point with a different user" do
+    other_user = create(:user, slack_id: "456", slack_name: "brian")
+
     expect {
       post "/slack",
         text: "brian swore",
@@ -49,11 +51,13 @@ describe "Data Point Creation" do
 
     data_point = DataPoint.last
     expect(data_point.metric).to eq(metric)
-    expect(data_point.user).to eq(user) # brian
+    expect(data_point.user).to eq(other_user)
     expect(data_point.number).to eq(1)
   end
 
   it "creates a data point with a different number and user" do
+    other_user = create(:user, slack_id: "456", slack_name: "brian")
+
     expect {
       post "/slack",
         text: "brian swore 2 times",
@@ -65,7 +69,7 @@ describe "Data Point Creation" do
 
     data_point = DataPoint.last
     expect(data_point.metric).to eq(metric)
-    expect(data_point.user).to eq(user) # brian
+    expect(data_point.user).to eq(other_user)
     expect(data_point.number).to eq(2)
   end
 
