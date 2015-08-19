@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  SELF_PATTERN = /\A(i|me|(my)?self)\z/i
+
   class NoMatch < StandardError; end
 
   has_many :data_points, inverse_of: :user, dependent: :delete_all
@@ -10,7 +12,7 @@ class User < ActiveRecord::Base
     metric ||= Metric.from_slash_command(payload)
     match = metric.regexp.match(payload[:text])
 
-    if match.names.include?("user") && match[:user]
+    if match.names.include?("user") && match[:user] && SELF_PATTERN !~ match[:user]
       find_by(slack_name: match[:user]) || raise(NoMatch)
     else
       User.find_or_initialize_by(slack_id: payload[:user_id]).tap do |user|

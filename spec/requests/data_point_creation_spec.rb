@@ -167,4 +167,20 @@ describe "Data Point Creation" do
     expect(data_point.user).to eq(user)
     expect(data_point.number).to eq(1)
   end
+
+  it "accepts first person pronouns as references to self" do
+    expect {
+      post "/slack",
+        text: "i swore",
+        user_id: user.slack_id,
+        user_name: user.slack_name
+    }.to change {
+      DataPoint.count
+    }.from(0).to(1)
+
+    data_point = DataPoint.last
+    expect(data_point.metric).to eq(metric)
+    expect(data_point.user).to eq(user)
+    expect(data_point.number).to eq(1)
+  end
 end
