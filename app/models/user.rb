@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
     metric ||= Metric.from_slash_command(payload)
     match = metric.regexp.match(payload[:text])
 
-    if match[:user]
+    if match.names.include?("user") && match[:user]
       find_by(slack_name: match[:user]) || raise(NoMatch)
     else
       User.find_or_initialize_by(slack_id: payload[:user_id]).tap do |user|

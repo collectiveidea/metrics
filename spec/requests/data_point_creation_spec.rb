@@ -149,4 +149,22 @@ describe "Data Point Creation" do
     expect(response.status).to eq(422)
     expect(response.body).to be_present
   end
+
+  it "creates a data point for a very simple metric pattern" do
+    simple_metric = create(:metric, pattern: "foo")
+
+    expect {
+      post "/slack",
+        text: "foo",
+        user_id: user.slack_id,
+        user_name: user.slack_name
+    }.to change {
+      DataPoint.count
+    }.from(0).to(1)
+
+    data_point = DataPoint.last
+    expect(data_point.metric).to eq(simple_metric)
+    expect(data_point.user).to eq(user)
+    expect(data_point.number).to eq(1)
+  end
 end

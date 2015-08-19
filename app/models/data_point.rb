@@ -13,7 +13,7 @@ class DataPoint < ActiveRecord::Base
     user = User.from_slash_command(payload, metric: metric)
 
     match = metric.regexp.match(payload[:text])
-    number = match[:number] || 1
+    number = match.names.include?("number") && match[:number] || 1
     data = payload.merge(Hash[match.names.zip(match.captures)])
 
     DataPoint.create(
