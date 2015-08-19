@@ -35,6 +35,12 @@ class MetricsController < ApplicationController
     end
   end
 
+  def destroy
+    Metric.destroy(params[:id])
+
+    redirect_to metrics_path
+  end
+
   private
 
   def metric_params

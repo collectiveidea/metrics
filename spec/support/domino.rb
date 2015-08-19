@@ -44,6 +44,10 @@ module DOM
       def edit
         node.click_link("Edit")
       end
+
+      def remove
+        node.click_link("Remove")
+      end
     end
 
     class Detail < Domino

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :metrics, except: [:destroy]
+  resources :metrics
 
   post "slack" => "slack#slash_command"
 

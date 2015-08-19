@@ -13,6 +13,7 @@
           <td class="metric-row-actions">
             <%= link_to "View", metric %>
             <%= link_to "Edit", edit_metric_path(metric) %>
+            <%= link_to "Remove", metric, method: :delete %>
           </td>
         </tr>
       <% end %>
