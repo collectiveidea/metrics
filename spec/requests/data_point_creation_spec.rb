@@ -1,4 +1,4 @@
-describe "Metric Ping" do
+describe "Data Point Creation" do
   let!(:metric) { create(:metric, pattern: '^((?<user>[^ ]+) )?swore( (?<howbad>badly))?( (?<number>\d+(\.\d+)?) times)?$') }
   let!(:user) { create(:user, slack_id: "123", slack_name: "steve") }
 
