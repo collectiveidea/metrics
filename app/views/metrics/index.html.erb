@@ -1,22 +1,44 @@
-<div class="metric-list">
-  <table class="metric-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @metrics.each do |metric| %>
-        <tr class="metric-row">
-          <td class="metric-row-name"><%= metric.name %></td>
-          <td class="metric-row-actions">
-            <%= link_to "View", metric %>
-            <%= link_to "Edit", edit_metric_path(metric) %>
-            <%= link_to "Remove", metric, method: :delete %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="metric-list container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="page-header">
+        <nav class="pull-right">
+          <%= link_to fa_icon("plus", text: "Add Metric"), new_metric_path, class: "btn btn-primary" %>
+        </nav>
+        <h1>
+          <span class="metric-list-count"><%= @metrics.size %></span>
+          <%= "Metric".pluralize(@metrics.size) %>
+        </h1>
+      </div>
+      <table class="metric-table table table-striped">
+        <thead>
+          <tr>
+            <th><%= Metric.human_attribute_name(:name) %></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @metrics.each do |metric| %>
+            <tr class="metric-row">
+              <td class="metric-row-name"><%= metric.name %></td>
+              <td class="metric-row-actions">
+                <%= link_to metric, class: "btn btn-xs btn-default" do %>
+                  <span class="visible-xs"><%= fa_icon("eye") %></span>
+                  <span class="hidden-xs">View</span>
+                <% end %>
+                <%= link_to edit_metric_path(metric), class: "btn btn-xs btn-default" do %>
+                  <span class="visible-xs"><%= fa_icon("pencil") %></span>
+                  <span class="hidden-xs">Edit</span>
+                <% end %>
+                <%= link_to metric, method: :delete, class: "btn btn-xs btn-danger", data: { confirm: "Are you sure?" } do %>
+                  <span class="visible-xs"><%= fa_icon("trash") %></span>
+                  <span class="hidden-xs">Remove</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
