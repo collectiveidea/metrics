@@ -9,8 +9,8 @@ class Metric < ActiveRecord::Base
 
   delegate :=~, to: :regexp
 
-  def self.match(text)
-    metrics = where(":text ~ regexp_replace(pattern, '\\?<\\w+>', '', 'g')", text: text).to_a
+  def self.from_slash_command(payload)
+    metrics = where(":text ~ regexp_replace(pattern, '\\?<\\w+>', '', 'g')", text: payload[:text]).to_a
 
     raise NoMatch if metrics.none?
     raise MultipleMatches if metrics.many?

@@ -1,7 +1,6 @@
 class SlackController < ApplicationController
   def slash_command
-    metric = Metric.match(params[:text])
-    metric.ping(text: params[:text], user: params[:user_name])
+    DataPoint.from_slash_command(request.request_parameters)
 
     render text: t("ping.created"), status: :created
   rescue Metric::NoMatch
