@@ -13,6 +13,7 @@ class DataPoint < ActiveRecord::Base
     match = metric.regexp.match(payload[:text])
     number = match.names.include?("number") && match[:number] || 1
     metadata = payload.merge(Hash[match.names.zip(match.captures)])
+    metadata.update(number: number, user: user.slack_name)
 
     DataPoint.create(
       metric: metric,
