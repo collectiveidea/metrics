@@ -3,7 +3,7 @@ en:
     data_point:
       created: "Thank you!"
     metric:
-      no_match: "Sorry! I couldn't find a metric that matches."
-      multiple_matches: "Sorry! I found multiple metrics that match."
+      no_match: "Sorry! I don't know what that means."
+      multiple_matches: "Sorry! That could mean a couple of things."
     user:
       no_match: "Sorry! I don't know who that is."
