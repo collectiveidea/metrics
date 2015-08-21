@@ -44,6 +44,6 @@ class MetricsController < ApplicationController
   private
 
   def metric_params
-    params.require(:metric).permit(:name, :pattern)
+    params.require(:metric).permit(:name, :pattern, :example)
   end
 end

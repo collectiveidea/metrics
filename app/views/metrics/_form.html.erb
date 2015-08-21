@@ -13,5 +13,10 @@
   help.</p>
 </div>
 <div class="form-group">
+  <%= form.label :example, class: "control-label" %>
+  <%= form.text_field :example, class: "form-control", placeholder: "i ate 2 hot dogs" %>
+  <p class="help-block">An example command to display in help text.</p>
+</div>
+<div class="form-group">
   <%= button_tag fa_icon("check", text: "Save Metric"), class: "btn btn-block btn-lg btn-primary", data: { disable: true } %>
 </div>

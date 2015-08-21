@@ -14,6 +14,7 @@
         <thead>
           <tr>
             <th><%= Metric.human_attribute_name(:name) %></th>
+            <th class="hidden-xs"><%= Metric.human_attribute_name(:example) %></th>
             <th></th>
           </tr>
         </thead>
@@ -21,6 +22,7 @@
           <% @metrics.each do |metric| %>
             <tr class="metric-row">
               <td class="metric-row-name"><%= metric.name %></td>
+              <td class="metric-row-example hidden-xs"><%= metric.example %></td>
               <td class="metric-row-actions">
                 <%= link_to metric, class: "btn btn-xs btn-default" do %>
                   <span class="visible-xs"><%= fa_icon("eye") %></span>

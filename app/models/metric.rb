@@ -20,9 +20,10 @@ class Metric < ActiveRecord::Base
 
   has_many :data_points, inverse_of: :metric, dependent: :delete_all
 
-  validates :name, :pattern, presence: true
+  validates :name, :pattern, :example, presence: true
   validate :pattern_must_be_valid
   validate :pattern_must_not_contain_reserved_names, if: :valid_pattern?
+  validates :example, format: { with: proc(&:regexp) }, if: :valid_pattern?
 
   delegate :=~, to: :regexp
 
