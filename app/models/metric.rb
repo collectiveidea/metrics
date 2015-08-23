@@ -23,7 +23,8 @@ class Metric < ActiveRecord::Base
   validates :name, :pattern, :example, presence: true
   validate :pattern_must_be_valid
   validate :pattern_must_not_contain_reserved_names, if: :valid_pattern?
-  validates :example, format: { with: proc(&:regexp) }, if: :valid_pattern?
+  validates :example, if: :valid_pattern?,
+    format: { with: proc(&:regexp), message: "must match the pattern" }
 
   delegate :=~, to: :regexp
 
@@ -55,6 +56,14 @@ class Metric < ActiveRecord::Base
   end
 
   def pattern_must_not_contain_reserved_names
-    errors.add(:pattern) if (regexp.names & RESERVED_NAMES).any?
+    reserved_names = regexp.names & RESERVED_NAMES
+
+    if reserved_names.any?
+      errors.add(:pattern, <<-MSG.squish)
+        must not contain the group
+        #{"name".pluralize(reserved_names.size)}:
+        #{reserved_names.join(", ")}
+        MSG
+    end
   end
 end
