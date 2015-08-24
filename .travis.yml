@@ -1,0 +1,6 @@
+before_script: bin/setup
+branches: master
+cache: bundler
+language: ruby
+rvm: 2.2.2
+sudo: false
