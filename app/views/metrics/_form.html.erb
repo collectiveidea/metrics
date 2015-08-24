@@ -5,7 +5,7 @@
 </div>
 <div class="form-group">
   <%= form.label :pattern, class: "control-label" %>
-  <%= form.text_area :pattern, class: "form-control", placeholder: '^(?<user>[^ ]+) ate (?<number>\d+(\.\d+)?) hot ?dogs?$' %>
+  <%= form.text_area :pattern, id: "metric-form-pattern", class: "form-control", placeholder: '^(?<user>[^ ]+) ate (?<number>\d+(\.\d+)?) hot ?dogs?$' %>
   <%= error_messages_for(form, :pattern) %>
   <p class="help-block">A pattern to match an incoming <code>/track</code>
   command. Use named groups to capture metadata. The <code>user</code> named
@@ -22,6 +22,14 @@
   </div>
   <%= error_messages_for(form, :help) %>
   <p class="help-block">Help text for using this pattern.</p>
+</div>
+<div class="form-group">
+  <label for="metric-form-command">Sandbox</label>
+  <div class="input-group">
+    <div class="input-group-addon">/track</div>
+    <input autocomplete="off" class="form-control" id="metric-form-command" type="text">
+  </div>
+  <p class="help-block">Use this field to test your pattern. Try a command and see what data is captured!</p>
 </div>
 <div class="form-group">
   <%= button_tag fa_icon("check", text: "Save Metric"), class: "btn btn-block btn-lg btn-primary", data: { disable: true } %>

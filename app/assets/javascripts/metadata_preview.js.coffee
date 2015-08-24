@@ -1,7 +1,7 @@
 class MetadataPreview
   constructor: ->
-    @pattern = $(".metric-form-pattern")
-    @command = $(".metric-form-command")
+    @pattern = $("#metric-form-pattern")
+    @command = $("#metric-form-command")
 
     @timeout = null
 
