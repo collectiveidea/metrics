@@ -33,7 +33,7 @@ class MetadataPreview
 
   receiveMetadata: (data) =>
     if $.isEmptyObject(data)
-      @showError() if @example.val()
+      @error()
       return
 
     $table = $("<table>")
@@ -58,8 +58,11 @@ class MetadataPreview
     @content = null
     @example.popover("hide")
 
-  showError: =>
-    @show $("<span>").addClass("text-danger").text("No matches!")
+  error: =>
+    if @example.val()
+      @show $("<span>").addClass("text-danger").text("No matches!")
+    else
+      @hide()
 
 $ ->
   window.metadataPreview = new MetadataPreview
