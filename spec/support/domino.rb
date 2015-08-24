@@ -19,12 +19,12 @@ module DOM
         node.fill_in("metric[pattern]", with: value)
       end
 
-      def example
-        node.find_field("metric[example]").value
+      def help
+        node.find_field("metric[help]").value
       end
 
-      def example=(value)
-        node.fill_in("metric[example]", with: value)
+      def help=(value)
+        node.fill_in("metric[help]", with: value)
       end
 
       def submit
@@ -44,7 +44,7 @@ module DOM
       selector ".metric-row"
 
       attribute :name, ".metric-row-name"
-      attribute :example, ".metric-row-example"
+      attribute :help, ".metric-row-help"
 
       def view
         node.click_link("View")
@@ -64,7 +64,7 @@ module DOM
 
       attribute :name, ".metric-detail-name"
       attribute :pattern, ".metric-detail-pattern"
-      attribute :example, ".metric-detail-example"
+      attribute :help, ".metric-detail-help"
     end
   end
 end

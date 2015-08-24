@@ -2,6 +2,6 @@ FactoryGirl.define do
   factory :metric do
     name "My Metric"
     pattern "(foo|bar)"
-    example "foo"
+    help "foo"
   end
 end

@@ -44,7 +44,7 @@ class MetricsController < ApplicationController
   def preview
     metadata = Metric.preview_metadata(
       pattern: params[:pattern],
-      example: params[:example]
+      command: params[:command]
     )
 
     render json: metadata
@@ -53,6 +53,6 @@ class MetricsController < ApplicationController
   private
 
   def metric_params
-    params.require(:metric).permit(:name, :pattern, :example)
+    params.require(:metric).permit(:name, :pattern, :help)
   end
 end

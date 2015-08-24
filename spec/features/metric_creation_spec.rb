@@ -2,7 +2,7 @@ feature "Metric Creation" do
   scenario "A visitor can create a metric" do
     name = "Swear Jar"
     pattern = "(?<user>[^ ]+) swore( (?<number>\d+) times)?"
-    example = "i swore"
+    help = "i swore"
 
     visit new_metric_path
 
@@ -10,7 +10,7 @@ feature "Metric Creation" do
       form = DOM::Metric::Form.find!
       form.name = name
       form.pattern = pattern
-      form.example = example
+      form.help = help
       form.submit
     }.to change {
       Metric.count
@@ -22,7 +22,7 @@ feature "Metric Creation" do
 
     row = DOM::Metric::Row.first
     expect(row.name).to eq(name)
-    expect(row.example).to eq(example)
+    expect(row.help).to eq(help)
 
     row.view
 
@@ -31,6 +31,6 @@ feature "Metric Creation" do
     detail = DOM::Metric::Detail.find!
     expect(detail.name).to eq(name)
     expect(detail.pattern).to eq(pattern)
-    expect(detail.example).to eq(example)
+    expect(detail.help).to eq(help)
   end
 end

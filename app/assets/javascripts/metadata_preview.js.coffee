@@ -1,7 +1,7 @@
 class MetadataPreview
   constructor: ->
-    @pattern = $("[name='metric[pattern]']")
-    @example = $("[name='metric[example]']")
+    @pattern = $(".metric-form-pattern")
+    @command = $(".metric-form-command")
 
     @timeout = null
 
@@ -9,16 +9,16 @@ class MetadataPreview
     @listen()
 
   initializePopover: ->
-    @example.popover
+    @command.popover
       content: => @content
       html: true
       placement: "auto top"
       trigger: "manual"
 
   listen: ->
-    @example.on "focus", @fetchMetadata
-    @example.on "input", @scheduleMetadataFetch
-    @example.on "blur", @hide
+    @command.on "focus", @fetchMetadata
+    @command.on "input", @scheduleMetadataFetch
+    @command.on "blur", @hide
 
   scheduleMetadataFetch: =>
     clearTimeout @timeout
@@ -27,7 +27,7 @@ class MetadataPreview
   fetchMetadata: =>
     $.getJSON(
       "/metrics/preview"
-      { pattern: @pattern.val(), example: @example.val() }
+      { pattern: @pattern.val(), command: @command.val() }
       @receiveMetadata
     )
 
@@ -51,15 +51,15 @@ class MetadataPreview
 
     unless content == @content
       @content = content
-      @example.popover("show")
+      @command.popover("show")
 
   hide: =>
     clearTimeout @timeout
     @content = null
-    @example.popover("hide")
+    @command.popover("hide")
 
   error: =>
-    if @example.val()
+    if @command.val()
       @show $("<span>").addClass("text-danger").text("No matches!")
     else
       @hide()

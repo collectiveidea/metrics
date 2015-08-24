@@ -3,19 +3,19 @@ feature "Metric Updation" do
     metric = create(:metric,
       name: "Swear Jar",
       pattern: "(?<user>[^ ]+) swore",
-      example: "i swore"
+      help: "i swore"
     )
 
     name = "Donut Fund"
     pattern = "(?<user>[^ ]+) really wants? donuts"
-    example = "i really want donuts"
+    help = "i really want donuts"
 
     visit edit_metric_path(metric)
 
     form = DOM::Metric::Form.find!
     form.name = name
     form.pattern = pattern
-    form.example = example
+    form.help = help
     form.submit
 
     metric = Metric.last
@@ -24,7 +24,7 @@ feature "Metric Updation" do
 
     row = DOM::Metric::Row.first
     expect(row.name).to eq(name)
-    expect(row.example).to eq(example)
+    expect(row.help).to eq(help)
 
     row.view
 
@@ -33,6 +33,6 @@ feature "Metric Updation" do
     detail = DOM::Metric::Detail.find!
     expect(detail.name).to eq(name)
     expect(detail.pattern).to eq(pattern)
-    expect(detail.example).to eq(example)
+    expect(detail.help).to eq(help)
   end
 end

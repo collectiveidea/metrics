@@ -1,5 +1,5 @@
 describe "POST /slack" do
-  let!(:metric) { create(:metric, pattern: '^((?<user>[^ ]+) )?swore( (?<howbad>badly))?( (?<number>\d+(\.\d+)?) times)?$', example: "i swore") }
+  let!(:metric) { create(:metric, pattern: '^((?<user>[^ ]+) )?swore( (?<howbad>badly))?( (?<number>\d+(\.\d+)?) times)?$') }
   let!(:user) { create(:user, slack_id: "123", slack_name: "steve") }
 
   it "creates a data point for the matching metric" do
@@ -121,7 +121,7 @@ describe "POST /slack" do
   end
 
   it "bombs if the text matches multiple metrics" do
-    create(:metric, pattern: "wore", example: "i wore flip-flops")
+    create(:metric, pattern: "wore")
 
     expect {
       post "/slack",

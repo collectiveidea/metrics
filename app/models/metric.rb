@@ -20,11 +20,9 @@ class Metric < ActiveRecord::Base
 
   has_many :data_points, inverse_of: :metric, dependent: :delete_all
 
-  validates :name, :pattern, :example, presence: true
+  validates :name, :pattern, :help, presence: true
   validate :pattern_must_be_valid
   validate :pattern_must_not_contain_reserved_names, if: :valid_pattern?
-  validates :example, if: :valid_pattern?,
-    format: { with: proc(&:regexp), message: "must match the pattern" }
 
   delegate :=~, to: :regexp
 
@@ -37,12 +35,12 @@ class Metric < ActiveRecord::Base
     metrics.first
   end
 
-  def self.preview_metadata(pattern:, example:)
-    metric = new(pattern: pattern, example: example)
+  def self.preview_metadata(pattern:, command:)
+    metric = new(pattern: pattern)
     return {} unless metric.valid_pattern?
 
     regexp = metric.regexp
-    match = regexp.match(metric.example)
+    match = regexp.match(command)
     return {} unless match
 
     regexp.names.inject({}) { |h, n| h[n] = match[n]; h }

@@ -15,13 +15,13 @@
   help.</p>
 </div>
 <div class="form-group">
-  <%= form.label :example, class: "control-label" %>
+  <%= form.label :help, class: "control-label" %>
   <div class="input-group">
     <div class="input-group-addon">/track</div>
-    <%= form.text_field :example, class: "form-control", placeholder: "i ate 2 hot dogs", autocomplete: "off" %>
+    <%= form.text_field :help, class: "form-control", placeholder: "i ate # hot dogs", autocomplete: "off" %>
   </div>
-  <%= error_messages_for(form, :example) %>
-  <p class="help-block">An example command to display in help text.</p>
+  <%= error_messages_for(form, :help) %>
+  <p class="help-block">Help text for using this pattern.</p>
 </div>
 <div class="form-group">
   <%= button_tag fa_icon("check", text: "Save Metric"), class: "btn btn-block btn-lg btn-primary", data: { disable: true } %>
