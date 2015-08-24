@@ -1,6 +1,6 @@
 <div class="form-group">
   <%= form.label :name, class: "control-label" %>
-  <%= form.text_field :name, class: "form-control" %>
+  <%= form.text_field :name, class: "form-control", autocomplete: "off" %>
   <%= error_messages_for(form, :name) %>
 </div>
 <div class="form-group">
@@ -16,7 +16,10 @@
 </div>
 <div class="form-group">
   <%= form.label :example, class: "control-label" %>
-  <%= form.text_field :example, class: "form-control", placeholder: "i ate 2 hot dogs" %>
+  <div class="input-group">
+    <div class="input-group-addon">/track</div>
+    <%= form.text_field :example, class: "form-control", placeholder: "i ate 2 hot dogs", autocomplete: "off" %>
+  </div>
   <%= error_messages_for(form, :example) %>
   <p class="help-block">An example command to display in help text.</p>
 </div>

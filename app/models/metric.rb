@@ -37,11 +37,20 @@ class Metric < ActiveRecord::Base
     metrics.first
   end
 
+  def self.preview_metadata(pattern:, example:)
+    metric = new(pattern: pattern, example: example)
+    return {} unless metric.valid_pattern?
+
+    regexp = metric.regexp
+    match = regexp.match(metric.example)
+    return {} unless match
+
+    regexp.names.inject({}) { |h, n| h[n] = match[n]; h }
+  end
+
   def regexp
     Regexp.new(pattern, true)
   end
-
-  private
 
   def valid_pattern?
     regexp
@@ -50,6 +59,8 @@ class Metric < ActiveRecord::Base
   else
     true
   end
+
+  private
 
   def pattern_must_be_valid
     errors.add(:pattern) unless valid_pattern?

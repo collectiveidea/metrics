@@ -41,6 +41,15 @@ class MetricsController < ApplicationController
     redirect_to metrics_path
   end
 
+  def preview
+    metadata = Metric.preview_metadata(
+      pattern: params[:pattern],
+      example: params[:example]
+    )
+
+    render json: metadata
+  end
+
   private
 
   def metric_params
