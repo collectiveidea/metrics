@@ -16,3 +16,9 @@
     padding-left: 5px;
   }
 }
+
+.metric-table th,
+.metric-detail dt,
+.metric-form label {
+  text-transform: capitalize;
+}

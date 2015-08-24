@@ -20,9 +20,10 @@ class Metric < ActiveRecord::Base
 
   has_many :data_points, inverse_of: :metric, dependent: :delete_all
 
-  validates :name, :pattern, :help, presence: true
+  validates :name, :pattern, :help, :feedback, presence: true
   validate :pattern_must_be_valid
   validate :pattern_must_not_contain_reserved_names, if: :valid_pattern?
+  validate :feedback_must_not_contain_unknown_names, if: :valid_pattern?
 
   delegate :=~, to: :regexp
 
@@ -74,5 +75,14 @@ class Metric < ActiveRecord::Base
         #{reserved_names.join(", ")}
         MSG
     end
+  end
+
+  def feedback_must_not_contain_unknown_names
+    return if feedback.blank?
+
+    metadata = regexp.names.inject({}) { |h, n| h[n.to_sym] = true; h }
+    feedback % metadata
+  rescue KeyError
+    errors.add(:feedback)
   end
 end

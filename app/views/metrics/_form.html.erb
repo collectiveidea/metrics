@@ -15,6 +15,14 @@
   help.</p>
 </div>
 <div class="form-group">
+  <label for="metric-form-command">Sandbox</label>
+  <div class="input-group">
+    <div class="input-group-addon">/track</div>
+    <input autocomplete="off" class="form-control" id="metric-form-command" type="text">
+  </div>
+  <p class="help-block">Use this field to test your pattern. Try a command and see what data is captured!</p>
+</div>
+<div class="form-group">
   <%= form.label :help, class: "control-label" %>
   <div class="input-group">
     <div class="input-group-addon">/track</div>
@@ -24,12 +32,10 @@
   <p class="help-block">Help text for using this pattern.</p>
 </div>
 <div class="form-group">
-  <label for="metric-form-command">Sandbox</label>
-  <div class="input-group">
-    <div class="input-group-addon">/track</div>
-    <input autocomplete="off" class="form-control" id="metric-form-command" type="text">
-  </div>
-  <p class="help-block">Use this field to test your pattern. Try a command and see what data is captured!</p>
+  <%= form.label :feedback, class: "control-label" %>
+  <%= form.text_field :feedback, class: "form-control", placeholder: "Got it… %{number} hot dogs!", autocomplete: "off" %>
+  <%= error_messages_for(form, :feedback) %>
+  <p class="help-block">This text will be shown to the user after successful tracking. Inject your custom metadata into the message using <code>%{number}</code> syntax.</p>
 </div>
 <div class="form-group">
   <%= button_tag fa_icon("check", text: "Save Metric"), class: "btn btn-block btn-lg btn-primary", data: { disable: true } %>

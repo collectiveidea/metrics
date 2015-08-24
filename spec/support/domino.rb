@@ -27,6 +27,14 @@ module DOM
         node.fill_in("metric[help]", with: value)
       end
 
+      def feedback
+        node.find_field("metric[feedback]").value
+      end
+
+      def feedback=(value)
+        node.fill_in("metric[feedback]", with: value)
+      end
+
       def submit
         node.find("[type=submit]").click
       end
@@ -65,6 +73,7 @@ module DOM
       attribute :name, ".metric-detail-name"
       attribute :pattern, ".metric-detail-pattern"
       attribute :help, ".metric-detail-help"
+      attribute :feedback, ".metric-detail-feedback"
     end
   end
 end

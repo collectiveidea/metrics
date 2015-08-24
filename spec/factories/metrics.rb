@@ -3,5 +3,6 @@ FactoryGirl.define do
     name "My Metric"
     pattern "(foo|bar)"
     help "foo"
+    feedback "Thank you!"
   end
 end

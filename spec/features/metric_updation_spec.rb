@@ -3,12 +3,14 @@ feature "Metric Updation" do
     metric = create(:metric,
       name: "Swear Jar",
       pattern: "(?<user>[^ ]+) swore",
-      help: "i swore"
+      help: "i swore",
+      feedback: "Whoops!"
     )
 
     name = "Donut Fund"
     pattern = "(?<user>[^ ]+) really wants? donuts"
     help = "i really want donuts"
+    feedback = "Me too!"
 
     visit edit_metric_path(metric)
 
@@ -16,6 +18,7 @@ feature "Metric Updation" do
     form.name = name
     form.pattern = pattern
     form.help = help
+    form.feedback = feedback
     form.submit
 
     metric = Metric.last
@@ -34,5 +37,6 @@ feature "Metric Updation" do
     expect(detail.name).to eq(name)
     expect(detail.pattern).to eq(pattern)
     expect(detail.help).to eq(help)
+    expect(detail.feedback).to eq(feedback)
   end
 end

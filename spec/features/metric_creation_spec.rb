@@ -3,6 +3,7 @@ feature "Metric Creation" do
     name = "Swear Jar"
     pattern = "(?<user>[^ ]+) swore( (?<number>\d+) times)?"
     help = "i swore"
+    feedback = "Whoops!"
 
     visit new_metric_path
 
@@ -11,6 +12,7 @@ feature "Metric Creation" do
       form.name = name
       form.pattern = pattern
       form.help = help
+      form.feedback = feedback
       form.submit
     }.to change {
       Metric.count
@@ -32,5 +34,6 @@ feature "Metric Creation" do
     expect(detail.name).to eq(name)
     expect(detail.pattern).to eq(pattern)
     expect(detail.help).to eq(help)
+    expect(detail.feedback).to eq(feedback)
   end
 end

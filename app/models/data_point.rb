@@ -22,4 +22,8 @@ class DataPoint < ActiveRecord::Base
       metadata: metadata
     )
   end
+
+  def feedback
+    metric.feedback % metadata.symbolize_keys
+  end
 end

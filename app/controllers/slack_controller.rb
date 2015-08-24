@@ -7,8 +7,8 @@ class SlackController < ApplicationController
       @metrics = Metric.all
       render :help
     else
-      DataPoint.from_slash_command(request.request_parameters)
-      render text: t("slash_command.data_point.created"), status: :created
+      data_point = DataPoint.from_slash_command(request.request_parameters)
+      render text: data_point.feedback, status: :created
     end
   rescue Metric::NoMatch
     render text: t("slash_command.metric.no_match"), status: :unprocessable_entity

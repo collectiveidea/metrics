@@ -201,6 +201,17 @@ describe "POST /slack" do
       expect(data_point.user).to eq(user)
       expect(data_point.number).to eq(1)
     end
+
+    it "returns a custom message" do
+      metric.update!(feedback: "profanity += %{number}")
+
+      post "/slack",
+        text: "swore 2 times",
+        user_id: user.slack_id,
+        user_name: user.slack_name
+
+      expect(response.body).to eq("profanity += 2")
+    end
   end
 
   it "provides a help message" do
