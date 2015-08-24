@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     get "preview", on: :collection
   end
 
-  post "slack" => "slack#slash_command"
+  post "slack" => "slack#slash_command", defaults: { format: :text }
 
   root to: redirect("metrics", status: 302)
 end
