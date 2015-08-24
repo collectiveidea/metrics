@@ -1,4 +1,4 @@
-describe "Data Point Creation" do
+describe "POST /slack" do
   let!(:metric) { create(:metric, pattern: '^((?<user>[^ ]+) )?swore( (?<howbad>badly))?( (?<number>\d+(\.\d+)?) times)?$', example: "i swore") }
   let!(:user) { create(:user, slack_id: "123", slack_name: "steve") }
 
