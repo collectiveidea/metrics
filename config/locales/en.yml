@@ -1,4 +1,9 @@
 en:
+  activerecord:
+    attributes:
+      metric:
+        help: "Help Text"
+        pattern: "Regular Expression"
   slash_command:
     data_point:
       created: "Thank you!"
