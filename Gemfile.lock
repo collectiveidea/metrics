@@ -53,6 +53,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    codeclimate-test-reporter (0.4.7)
+      simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -63,6 +65,7 @@ GEM
     coffee-script-source (1.9.1.1)
     database_cleaner (1.4.1)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     domino (0.7.0)
       capybara (>= 0.4.0)
     erubis (2.7.0)
@@ -163,6 +166,11 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    simplecov (0.10.0)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     slop (3.6.0)
     sprockets (3.3.3)
       rack (~> 1.0)
@@ -188,6 +196,7 @@ DEPENDENCIES
   accept_values_for
   bootstrap-sass
   capybara
+  codeclimate-test-reporter
   coffee-rails
   database_cleaner
   domino
