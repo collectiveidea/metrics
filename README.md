@@ -7,8 +7,8 @@ for a lot of our day-to-day communications. The Metrics app allows us to track
 all sorts of data without leaving our normal workflow.
 
 [![Build Status](https://travis-ci.org/collectiveidea/metrics.svg?branch=master)](https://travis-ci.org/collectiveidea/metrics)
-[![Code Climate](https://codeclimate.com/github/collectiveidea/metrics/badges/gpa.svg)](https://codeclimate.com/github/collectiveidea/metrics)
-[![Test Coverage](https://codeclimate.com/github/collectiveidea/metrics/badges/coverage.svg)](https://codeclimate.com/github/collectiveidea/metrics)
+[![Code Climate](https://codeclimate.com/github/collectiveidea/metrics/badges/gpa.svg)](https://codeclimate.com/github/collectiveidea/metrics/code)
+[![Test Coverage](https://codeclimate.com/github/collectiveidea/metrics/badges/coverage.svg)](https://codeclimate.com/github/collectiveidea/metrics/coverage)
 [![Dependency Status](https://gemnasium.com/collectiveidea/metrics.svg)](https://gemnasium.com/collectiveidea/metrics)
 
 ## How does it work?
