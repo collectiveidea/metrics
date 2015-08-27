@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Ruby
-ruby "2.2.2"
+ruby "2.2.3"
 
 # Rails
 gem "rails", "4.2.4"

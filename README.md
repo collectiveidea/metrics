@@ -36,7 +36,7 @@ and is stored as a decimal number (defaults to 1.0).
 ```
 $ git clone git@github.com:collectiveidea/metrics.git
 $ cd metrics
-$ rvm 2.2.2@metrics --create --ruby-version
+$ rvm 2.2.3@metrics --create --ruby-version
 $ bin/setup
 $ rspec
 ```
