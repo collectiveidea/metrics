@@ -47,6 +47,10 @@ class Metric < ActiveRecord::Base
     regexp.names.inject({}) { |h, n| h[n] = match[n]; h }
   end
 
+  def self.by_latest_data_point
+    order("metrics.latest_data_point_at DESC NULLS LAST, metrics.created_at ASC")
+  end
+
   def regexp
     Regexp.new(pattern, true)
   end

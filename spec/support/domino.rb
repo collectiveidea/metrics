@@ -41,10 +41,18 @@ module DOM
     end
 
     class List < Domino
+      include Enumerable
+
       selector ".metric-list"
+
+      delegate :each, to: :rows
 
       def rows
         within(node) { Row.all }
+      end
+
+      def names
+        map(&:name)
       end
     end
 

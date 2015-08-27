@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824171542) do
+ActiveRecord::Schema.define(version: 20150827173442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,13 +36,15 @@ ActiveRecord::Schema.define(version: 20150824171542) do
   create_table "metrics", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.string   "pattern"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.string   "help"
     t.string   "feedback"
+    t.datetime "latest_data_point_at"
   end
 
   add_index "metrics", ["created_at"], name: "index_metrics_on_created_at", using: :btree
+  add_index "metrics", ["latest_data_point_at"], name: "index_metrics_on_latest_data_point_at", using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "slack_id"

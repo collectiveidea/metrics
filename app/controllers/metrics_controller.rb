@@ -1,6 +1,6 @@
 class MetricsController < ApplicationController
   def index
-    @metrics = Metric.all
+    @metrics = Metric.by_latest_data_point
   end
 
   def show

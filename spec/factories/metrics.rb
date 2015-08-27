@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :metric do
-    name "My Metric"
+    sequence(:name) { |n| "My Metric #{n}" }
     pattern "(foo|bar)"
     help "foo"
     feedback "Thank you!"
