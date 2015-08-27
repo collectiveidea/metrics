@@ -34,6 +34,7 @@ group :development, :test do
   gem "database_cleaner"
   gem "domino"
   gem "factory_girl_rails"
+  gem "foreman"
   gem "pry-rails"
   gem "rspec-rails"
 end
