@@ -1,4 +1,6 @@
+# The display name of the application
+APP_NAME: "Metrics"
+
 # Optional HTTP basic authentication configuration
 # BASIC_AUTH_NAME: "example"
 # BASIC_AUTH_PASSWORD: "secret"
-# BASIC_AUTH_REALM: "Metrics"
