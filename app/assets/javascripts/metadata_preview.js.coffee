@@ -41,7 +41,12 @@ class MetadataPreview
     for key, value of data
       $row = $("<tr>")
       $row.append $("<th>").text(key)
-      $row.append $("<td>").text(value)
+
+      if value
+        $row.append $("<td>").text(value)
+      else
+        $row.append $("<td>").addClass("text-muted").text("none")
+
       $table.append $row
 
     @show $table
