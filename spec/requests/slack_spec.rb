@@ -233,4 +233,25 @@ describe "POST /slack" do
       Bar: i bar # times
       BODY
   end
+
+  it "orders the help message by most recent data point" do
+    create(:metric, name: "Foo", help: "i have # foos")
+    bar = create(:metric, name: "Bar", help: "i bar # times")
+    create(:data_point, metric: bar)
+
+    expect {
+      post "/slack",
+        text: "help",
+        user_id: user.slack_id,
+        user_name: user.slack_name
+    }.not_to change {
+      DataPoint.count
+    }
+
+    expect(response.status).to eq(200)
+    expect(response.body).to eq(<<-BODY.strip_heredoc)
+      Bar: i bar # times
+      Foo: i have # foos
+      BODY
+  end
 end

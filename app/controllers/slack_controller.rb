@@ -4,7 +4,7 @@ class SlackController < ApplicationController
   def slash_command
     case params[:text]
     when "", "help"
-      @metrics = Metric.all
+      @metrics = Metric.by_latest_data_point
       render :help
     else
       data_point = DataPoint.from_slash_command(request.request_parameters)
