@@ -63,7 +63,7 @@ module DOM
       attribute :help, ".metric-row-help"
 
       def view
-        node.click_link("View")
+        node.click_link("Stats")
       end
 
       def edit
