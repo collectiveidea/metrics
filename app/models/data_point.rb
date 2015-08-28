@@ -1,5 +1,6 @@
 class DataPoint < ActiveRecord::Base
-  belongs_to :metric, inverse_of: :data_points, touch: :latest_data_point_at
+  belongs_to :metric, inverse_of: :data_points, touch: :latest_data_point_at,
+    counter_cache: true
   belongs_to :user, inverse_of: :data_points
 
   validates :metric, presence: true, strict: true

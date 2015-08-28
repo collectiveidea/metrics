@@ -5,7 +5,10 @@
         <nav class="pull-right">
           <%= link_to fa_icon("arrow-left", text: "Back"), metrics_path, class: "btn btn-default" %>
         </nav>
-        <h1 class="metric-detail-name"><%= @metric.name %></h1>
+        <h1 class="metric-detail-name">
+          <%= @metric.name %>
+          <span class="badge" title="<%= number_with_delimiter(@metric.data_points_count) %> <%= "data point".pluralize(@metric.data_points_count) %>"><%= number_with_delimiter(@metric.data_points_count) %></span>
+        </h1>
       </div>
       <% if @metric.metadata_names.any? %>
         <div class="metric-detail-graph-controls form-inline">
