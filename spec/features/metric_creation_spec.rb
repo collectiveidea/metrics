@@ -26,14 +26,14 @@ feature "Metric Creation" do
     expect(row.name).to eq(name)
     expect(row.help).to eq(help)
 
-    row.view
+    row.edit
 
-    expect(current_path).to eq(metric_path(metric))
+    expect(current_path).to eq(edit_metric_path(metric))
 
-    detail = DOM::Metric::Detail.find!
-    expect(detail.name).to eq(name)
-    expect(detail.pattern).to eq(pattern)
-    expect(detail.help).to eq(help)
-    expect(detail.feedback).to eq(feedback)
+    form = DOM::Metric::Form.find!
+    expect(form.name).to eq(name)
+    expect(form.pattern).to eq(pattern)
+    expect(form.help).to eq(help)
+    expect(form.feedback).to eq(feedback)
   end
 end

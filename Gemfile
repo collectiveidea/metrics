@@ -21,7 +21,9 @@ gem "sass-rails"
 gem "uglifier"
 
 # Runtime
+gem "chartkick"
 gem "figaro"
+gem "groupdate"
 
 group :production do
   gem "rails_12factor"

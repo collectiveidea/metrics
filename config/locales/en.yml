@@ -11,3 +11,6 @@ en:
       multiple_matches: "Sorry! That could mean a couple of things."
     user:
       no_match: "Sorry! I don't know who that is."
+  date:
+    formats:
+      graph: "%b %-d"

@@ -7,14 +7,19 @@
         </nav>
         <h1 class="metric-detail-name"><%= @metric.name %></h1>
       </div>
-      <dl>
-        <dt><%= Metric.human_attribute_name(:pattern) %></dt>
-        <dd class="metric-detail-pattern"><%= @metric.pattern %></dd>
-        <dt><%= Metric.human_attribute_name(:help) %></dt>
-        <dd class="metric-detail-help"><%= @metric.help %></dd>
-        <dt><%= Metric.human_attribute_name(:feedback) %></dt>
-        <dd class="metric-detail-feedback"><%= @metric.feedback %></dd>
-      </dl>
+      <% if @metric.metadata_names.any? %>
+        <div class="metric-detail-graph-controls form-inline">
+          <div class="form-group">
+            <%= label_tag "metric-detail-graph-days", "Show:" %>
+            <%= select_tag "metric-detail-graph-days", options_for_select([["a week", 7], ["a month", 30], ["a year", 365]], selected: 30), class: "form-control input-sm", data: { url: graph_metric_path(@metric) } %>
+            <%= label_tag "metric-detail-graph-metadata-name", "by:" %>
+            <%= select_tag "metric-detail-graph-metadata-name", options_for_select(@metric.metadata_names), include_blank: true, class: "form-control input-sm", data: { url: graph_metric_path(@metric) } %>
+          </div>
+        </div>
+      <% end %>
+      <div class="metric-detail-graph-container">
+        <%= render "graph" %>
+      </div>
     </div>
   </div>
 </div>

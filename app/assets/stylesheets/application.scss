@@ -18,7 +18,22 @@
 }
 
 .metric-table th,
-.metric-detail dt,
 .metric-form label {
   text-transform: capitalize;
+}
+
+@media (min-width: 768px) {
+  .metric-detail-graph-controls {
+    select {
+      margin: 0 10px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .metric-detail-graph-controls {
+    select {
+      margin: 0 0 10px 0;
+    }
+  }
 }

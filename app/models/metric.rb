@@ -63,6 +63,30 @@ class Metric < ActiveRecord::Base
     true
   end
 
+  def graph(days:, metadata_name: nil)
+    range = days.days.ago.beginning_of_day..Time.current.end_of_day
+    data = data_points.where(created_at: range)
+
+    if metadata_name
+      metadata_value = "metadata -> '#{metadata_name}'"
+      data = data.order("#{metadata_value} NULLS LAST").group(metadata_value)
+    end
+
+    format = I18n.translate!("date.formats.graph")
+    json = data
+      .group_by_day(:created_at, format: format)
+      .sum(:number)
+      .chart_json
+
+    # The groupdate gem outputs a JSON string from the chart_json method. We
+    # want the origial Ruby hash.
+    JSON.load(json)
+  end
+
+  def metadata_names
+    regexp.names
+  end
+
   private
 
   def pattern_must_be_valid
