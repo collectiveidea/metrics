@@ -3,7 +3,10 @@
     <div class="col-md-6 col-md-offset-3">
       <div class="page-header">
         <nav class="pull-right">
-          <%= link_to fa_icon("plus", text: "Add Metric"), new_metric_path, class: "btn btn-primary" %>
+          <%= link_to new_metric_path, class: "btn btn-primary" do %>
+            <%= fa_icon("plus") %>
+            <span class="hidden-xs">Add Metric</span>
+          <% end %>
         </nav>
         <h1>
           <span class="metric-list-count"><%= @metrics.size %></span>

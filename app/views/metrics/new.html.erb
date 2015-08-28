@@ -3,7 +3,10 @@
     <div class="col-md-4 col-md-offset-4">
       <div class="page-header">
         <nav class="pull-right">
-          <%= link_to fa_icon("arrow-left", text: "Cancel"), metrics_path, class: "btn btn-default" %>
+          <%= link_to metrics_path, class: "btn btn-default" do %>
+            <%= fa_icon("arrow-left") %>
+            <span class="hidden-xs">Cancel</span>
+          <% end %>
         </nav>
         <h1>Add Metric</h1>
       </div>
