@@ -65,7 +65,7 @@ class MetadataPreview
 
   error: =>
     if @command.val()
-      @show $("<span>").addClass("text-danger").text("No matches!")
+      @show $("<span>").addClass("text-danger").text("No metadata!")
     else
       @hide()
 
