@@ -1,6 +1,16 @@
 describe "POST /slack" do
   let!(:user) { create(:user, slack_id: "123", slack_name: "steve") }
 
+  around do |example|
+    begin
+      @original_slack_command = ENV["SLACK_COMMAND"]
+      ENV["SLACK_COMMAND"] = "hello"
+      example.run
+    ensure
+      ENV["SLACK_COMMAND"] = @original_slack_command
+    end
+  end
+
   context "data point creation" do
     let!(:metric) { create(:metric, pattern: '^((?<user>[^ ]+) )?swore( (?<howbad>badly))?( (?<number>\d+(\.\d+)?) times)?$') }
 
@@ -229,8 +239,8 @@ describe "POST /slack" do
 
     expect(response.status).to eq(200)
     expect(response.body).to eq(<<-BODY.strip_heredoc)
-      Foo: i have # foos
-      Bar: i bar # times
+      Foo: /hello i have # foos
+      Bar: /hello i bar # times
       BODY
   end
 
@@ -250,8 +260,8 @@ describe "POST /slack" do
 
     expect(response.status).to eq(200)
     expect(response.body).to eq(<<-BODY.strip_heredoc)
-      Bar: i bar # times
-      Foo: i have # foos
+      Bar: /hello i bar # times
+      Foo: /hello i have # foos
       BODY
   end
 end

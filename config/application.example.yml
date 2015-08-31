@@ -4,3 +4,6 @@ APP_NAME: "Metrics"
 # Optional HTTP basic authentication configuration
 # BASIC_AUTH_NAME: "example"
 # BASIC_AUTH_PASSWORD: "secret"
+
+# The name of Slack's slash command that hooks into Metrics
+SLACK_COMMAND: "track"

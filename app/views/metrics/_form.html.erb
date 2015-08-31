@@ -7,7 +7,7 @@
   <%= form.label :pattern, class: "control-label" %>
   <%= form.text_area :pattern, id: "metric-form-pattern", class: "form-control", placeholder: '^(?<user>[^ ]+) ate (?<number>\d+(\.\d+)?) hot ?dogs?$' %>
   <%= error_messages_for(form, :pattern) %>
-  <p class="help-block">A pattern to match an incoming <code>/track</code>
+  <p class="help-block">A pattern to match an incoming <code>/<%= ENV["SLACK_COMMAND"] %></code>
   command. Use named groups to capture metadata. The <code>user</code> named
   group is for attributing a data point to a different Slack username. The
   <code>number</code> named group is for quantifying the data point (default is
@@ -17,7 +17,7 @@
 <div class="form-group">
   <label for="metric-form-command">Sandbox</label>
   <div class="input-group">
-    <div class="input-group-addon">/track</div>
+    <div class="input-group-addon">/<%= ENV["SLACK_COMMAND"] %></div>
     <input autocomplete="off" class="form-control" id="metric-form-command" type="text">
   </div>
   <p class="help-block">Use this field to test your pattern. Try a command and see what data is captured!</p>
@@ -25,7 +25,7 @@
 <div class="form-group">
   <%= form.label :help, class: "control-label" %>
   <div class="input-group">
-    <div class="input-group-addon">/track</div>
+    <div class="input-group-addon">/<%= ENV["SLACK_COMMAND"] %></div>
     <%= form.text_field :help, class: "form-control", placeholder: "i ate # hot dogs", autocomplete: "off" %>
   </div>
   <%= error_messages_for(form, :help) %>
