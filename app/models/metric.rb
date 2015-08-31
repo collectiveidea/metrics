@@ -108,7 +108,8 @@ class Metric < ActiveRecord::Base
   def feedback_must_not_contain_unknown_names
     return if feedback.blank?
 
-    metadata = regexp.names.inject({}) { |h, n| h[n.to_sym] = true; h }
+    all_metadata_names = metadata_names + RESERVED_NAMES
+    metadata = all_metadata_names.inject({}) { |h, n| h[n.to_sym] = true; h }
     feedback % metadata
   rescue KeyError
     errors.add(:feedback)
