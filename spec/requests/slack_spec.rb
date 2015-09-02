@@ -1,16 +1,6 @@
 describe "POST /slack" do
   let!(:user) { create(:user, slack_id: "123", slack_name: "steve") }
 
-  around do |example|
-    begin
-      @original_slack_command = ENV["SLACK_COMMAND"]
-      ENV["SLACK_COMMAND"] = "hello"
-      example.run
-    ensure
-      ENV["SLACK_COMMAND"] = @original_slack_command
-    end
-  end
-
   context "data point creation" do
     let!(:metric) { create(:metric, pattern: '^((?<user>[^ ]+) )?swore( (?<howbad>badly))?( (?<number>\d+(\.\d+)?) times)?$') }
 
@@ -225,8 +215,8 @@ describe "POST /slack" do
   end
 
   it "provides a help message" do
-    create(:metric, name: "Foo", help: "i have # foos")
-    create(:metric, name: "Bar", help: "i bar # times")
+    create(:metric, name: "foo", help: "i have # foos")
+    create(:metric, name: "bar", help: "i bar # times")
 
     expect {
       post "/slack",
@@ -239,14 +229,14 @@ describe "POST /slack" do
 
     expect(response.status).to eq(200)
     expect(response.body).to eq(<<-BODY.strip_heredoc)
-      Foo: /hello i have # foos
-      Bar: /hello i bar # times
+      foo: i have # foos
+      bar: i bar # times
       BODY
   end
 
   it "orders the help message by most recent data point" do
-    create(:metric, name: "Foo", help: "i have # foos")
-    bar = create(:metric, name: "Bar", help: "i bar # times")
+    create(:metric, name: "foo", help: "i have # foos")
+    bar = create(:metric, name: "bar", help: "i bar # times")
     create(:data_point, metric: bar)
 
     expect {
@@ -260,8 +250,8 @@ describe "POST /slack" do
 
     expect(response.status).to eq(200)
     expect(response.body).to eq(<<-BODY.strip_heredoc)
-      Bar: /hello i bar # times
-      Foo: /hello i have # foos
+      bar: i bar # times
+      foo: i have # foos
       BODY
   end
 end
