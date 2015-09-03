@@ -3,16 +3,16 @@
   <td class="metric-row-help hidden-xs"><%= metric.help %></td>
   <td class="metric-row-actions">
     <%= link_to metric, class: "btn btn-xs btn-default" do %>
-      <span class="visible-xs"><%= fa_icon("line-chart") %></span>
-      <span class="hidden-xs">Stats</span>
+      <%= fa_icon("line-chart") %>
+      <span class="sr-only">Stats</span>
     <% end %>
     <%= link_to edit_metric_path(metric), class: "btn btn-xs btn-default" do %>
-      <span class="visible-xs"><%= fa_icon("pencil") %></span>
-      <span class="hidden-xs">Edit</span>
+      <%= fa_icon("pencil") %>
+      <span class="sr-only">Edit</span>
     <% end %>
     <%= link_to metric, method: :delete, class: "btn btn-xs btn-danger", data: { confirm: "Are you sure?" } do %>
-      <span class="visible-xs"><%= fa_icon("trash") %></span>
-      <span class="hidden-xs">Remove</span>
+      <%= fa_icon("trash") %>
+      <span class="sr-only">Remove</span>
     <% end %>
   </td>
 </tr>
