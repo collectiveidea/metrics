@@ -6,5 +6,7 @@ Rails.application.routes.draw do
 
   post "slack" => "slack#slash_command", defaults: { format: :text }
 
+  get "ping" => proc { [200, { "Content-Type" => "text/plain" }, ["pong"]] }
+
   root to: redirect("metrics", status: 302)
 end
